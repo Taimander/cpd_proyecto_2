@@ -1,0 +1,12 @@
+
+.default-screen {
+    backdrop-filter: blur(10px);
+    padding-left: 4em;
+    padding-right: 4em;
+    padding-top:2em;
+    padding-bottom: 2em;
+    border: 0px solid #000;
+    border-radius: 10px;
+    background-color: rgba(7, 8, 67, 0.15);
+    
+}

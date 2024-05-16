@@ -1,0 +1,31 @@
+<div class="card mb-3 cpointer" style="background-color: rgba(0,0,0,0.50);" (click)="isOpen = !isOpen">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-1">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+            </div>
+            <div class="col">
+                <h5 style="color: white;">{{ first_name }} {{ last_name }}</h5>
+            </div>
+            <div class="col-auto">
+                <h5 style="color: white;">{{credit_limit | currency }}</h5>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isOpen" class="card-body">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <p style="color: white;">No. de Cliente: {{client_number}}</p>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <p style="color: white;">Correo electrónico: {{email_address}}</p>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <p style="color: white;">Nivel de ingreso: {{income_level}}</p>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <p style="color: white;">Región: {{region}}</p>
+            </div>
+        </div>
+    </div>
+</div>
