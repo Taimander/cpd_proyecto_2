@@ -4,15 +4,17 @@
         <br>
         <div class="row mb-4">
             <div class="col">
-                <app-home-card title="Clientes" description="75 clientes" style="--hc-color: rgba(216, 225, 186);"></app-home-card>
+                <app-home-card title="Clientes" description="75 clientes" style="--hc-color: rgba(216, 225, 186);" (click)="current_state=1"></app-home-card>
             </div>
             <div class="col">
-                <app-home-card title="Ordenes" description="180 ordenes" style="--hc-color: rgb(186, 187, 225);"></app-home-card>
+                <app-home-card title="Ordenes" description="180 ordenes" style="--hc-color: rgb(186, 187, 225);" (click)="current_state=2"></app-home-card>
             </div>
             <div class="col">
-                <app-home-card title="Productos" description="20 productos" style="--hc-color: rgb(225, 202, 186);"></app-home-card>
+                <app-home-card title="Productos" description="20 productos" style="--hc-color: rgb(225, 202, 186);" (click)="current_state=3"></app-home-card>
             </div>
         </div>
-        <app-search-customers></app-search-customers>
+        <app-search-customers *ngIf="current_state==1"></app-search-customers>
+        <app-search-orders *ngIf="current_state==2"></app-search-orders>
+        <app-search-products *ngIf="current_state==3"></app-search-products>
     </div>
 </div>

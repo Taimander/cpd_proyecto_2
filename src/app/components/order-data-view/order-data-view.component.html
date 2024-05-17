@@ -5,27 +5,32 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
             </div>
             <div class="col">
-                <h5 style="color: white;">{{ customer_data.cust_first_name }} {{ customer_data.cust_last_name }}</h5>
+                <h5 style="color: white;">Orden #{{order_data.order_id}} ({{order_data.customer_name}})</h5>
             </div>
             <div class="col-auto">
-                <h5 style="color: white;">{{ customer_data.credit_limit | currency }}</h5>
+                <h5 style="color: white;">{{order_data.order_total | currency}}</h5>
             </div>
         </div>
     </div>
     <div *ngIf="isOpen" class="card-body">
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <p style="color: white;">No. de Cliente: {{customer_data.customer_id}}</p>
+                <p style="color: white;">Fecha: {{order_data.order_date}}</p>
             </div>
             <div class="col d-flex justify-content-center">
-                <p style="color: white;">Correo electrónico: {{customer_data.cust_email}}</p>
+                <p style="color: white;">Modo: {{order_data.order_mode}}</p>
             </div>
             <div class="col d-flex justify-content-center">
-                <p style="color: white;">Nivel de ingreso: {{customer_data.income_level}}</p>
-            </div>
-            <div class="col d-flex justify-content-center">
-                <p style="color: white;">Región: {{customer_data.region}}</p>
+                <p style="color: white;">Estado: {{order_data.order_status}}</p>
             </div>
         </div>
+        <br>
+        <div style="color: white;">
+            Productos:
+            <div *ngFor="let item of order_data.items">
+                {{item.line_item_id}} - {{item.product_name}}: {{item.quantity}} a {{item.unit_price | currency}}
+            </div>
+        </div>
+        
     </div>
 </div>

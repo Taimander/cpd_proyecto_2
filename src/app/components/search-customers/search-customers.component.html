@@ -7,7 +7,10 @@
    </div>
 </div>
 <div class="mt-4">
-    <app-customer-data-view *ngFor="let i of [0,1,2,3,4]" first_name="Juan" last_name="Perez" [credit_limit]="1000"></app-customer-data-view>
+    <app-customer-data-view *ngFor="let i of customers" [customer_data]="i"></app-customer-data-view>
+</div>
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary">Agregar cliente</button>
 </div>
 
 

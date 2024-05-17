@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CustomerData } from 'src/app/dto/customer-data.dto';
 
 @Component({
   selector: 'app-customer-data-view',
@@ -7,14 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CustomerDataViewComponent {
 
-  @Input() first_name: string = '';
-  @Input() last_name: string = '';
-  @Input() credit_limit: number = 0;
-
-  @Input() client_number: number = 0;
-  @Input() email_address: string = '';
-  @Input() income_level: string = '';
-  @Input() region: string = '';
+  @Input() customer_data: CustomerData = new CustomerData();
 
   isOpen = false;
 
