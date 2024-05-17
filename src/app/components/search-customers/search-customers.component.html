@@ -7,10 +7,10 @@
    </div>
 </div>
 <div class="mt-4">
-    <app-customer-data-view *ngFor="let i of customers" [customer_data]="i"></app-customer-data-view>
+    <app-customer-data-view *ngFor="let i of customers" [customer_data]="i" (edit)="editFn($event);"></app-customer-data-view>
 </div>
 <div class="d-flex justify-content-end">
-    <button class="btn btn-primary">Agregar cliente</button>
+    <button class="btn btn-primary" (click)="modal_view.emit(true);">Agregar cliente</button>
 </div>
 
 

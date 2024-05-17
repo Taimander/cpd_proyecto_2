@@ -13,8 +13,181 @@
                 <app-home-card title="Productos" description="20 productos" style="--hc-color: rgb(225, 202, 186);" (click)="current_state=3"></app-home-card>
             </div>
         </div>
-        <app-search-customers *ngIf="current_state==1"></app-search-customers>
-        <app-search-orders *ngIf="current_state==2"></app-search-orders>
-        <app-search-products *ngIf="current_state==3"></app-search-products>
+        <app-search-customers *ngIf="current_state==1" (modal_view)="openClientsModal($event)" (edit)="editClient($event)"></app-search-customers>
+        <app-search-orders *ngIf="current_state==2" (modal_view)="openOrdersModal($event)" (edit)="editOrder($event)"></app-search-orders>
+        <app-search-products *ngIf="current_state==3" (modal_view)="openProductsModal($event)" (edit)="editProduct($event)"></app-search-products>
     </div>
 </div>
+
+<p-dialog [header]="isEditing?'Editar Cliente':'Agregar Cliente'" [modal]="true" [(visible)]="client_modal_visible" [style]="{ width: '50rem' }">
+    <div class="row">
+        <div class="col">
+            <label for="add_client_client_id" class="form-label">ID del cliente: </label>
+            <input [(ngModel)]="client_add_data.customer_id" id="add_client_client_id" type="number" placeholder="ID del cliente" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_client_first_name" class="form-label">Nombre: </label>
+            <input [(ngModel)]="client_add_data.cust_first_name" id="add_client_first_name" type="text" placeholder="Nombre" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_client_last_name" class="form-label">Apellido: </label>
+            <input [(ngModel)]="client_add_data.cust_last_name" id="add_client_last_name" type="text" placeholder="Apellido" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_client_credit_limit" class="form-label">Límite de crédito: </label>
+            <input [(ngModel)]="client_add_data.credit_limit" id="add_client_credit_limit" type="number" placeholder="Límite de crédito" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_client_email" class="form-label">Correo electrónico: </label>
+            <input [(ngModel)]="client_add_data.cust_email" id="add_client_email" type="text" placeholder="Correo electrónico" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_prod_income_level" class="form-label">Nivel de ingresos: </label>
+            <input [(ngModel)]="client_add_data.income_level" id="add_prod_income_level" type="text" placeholder="Nivel de ingresos" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_client_region" class="form-label">Región: </label>
+            <input [(ngModel)]="client_add_data.region" id="add_client_region" type="text" placeholder="Región" class="form-control">
+        </div>
+    </div>
+    <div class="mt-4 d-flex justify-content-end">
+        <button class="btn btn-secondary me-2" (click)="client_modal_visible=false;">Salir</button>
+        <button class="btn btn-primary">Agregar</button>
+    </div>
+</p-dialog>
+
+<p-dialog [header]="isEditing?'Editar Orden':'Agregar Orden'" [modal]="true" [(visible)]="order_modal_visible" [style]="{ width: '50rem' }">
+    <div class="row">
+        <div class="col">
+            <label for="add_order_order_id" class="form-label">ID de la orden: </label>
+            <input [(ngModel)]="order_add_data.order_id" id="add_order_order_id" type="number" placeholder="ID de la orden" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_order_date" class="form-label">Fecha: </label>
+            <input [(ngModel)]="order_add_data.order_date" id="add_order_date" type="date" placeholder="Fecha" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_order_mode" class="form-label">Modo: </label>
+            <input [(ngModel)]="order_add_data.order_mode" id="add_order_mode" type="text" placeholder="Modo" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_order_cust_id" class="form-label">ID del cliente: </label>
+            <input [(ngModel)]="order_add_data.customer_id" id="add_order_cust_id" type="number" placeholder="ID del cliente" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_order_status" class="form-label">Estado: </label>
+            <input [(ngModel)]="order_add_data.order_status" id="add_order_status" type="text" placeholder="Estado" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_order_sales_rep_id" class="form-label">ID del vendedor: </label>
+            <input [(ngModel)]="order_add_data.sales_rep_id" id="add_order_sales_rep_id" type="number" placeholder="ID del vendedor" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_order_promition_id" class="form-label">ID de la promoción: </label>
+            <input [(ngModel)]="order_add_data.promotion_id" id="add_order_promotion_id" type="number" placeholder="ID de la promoción" class="form-control">
+        </div>
+    </div>
+    <div class="mt-4">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">ID del producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of order_add_data.items">
+                    <td><input [(ngModel)]="i.order_id" type="number" class="form-control"></td>
+                    <td><input [(ngModel)]="i.quantity" type="number" class="form-control"></td>
+                    <td><input [(ngModel)]="i.unit_price" type="number" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="d-flex justify-content-end"><button class="btn btn-success" (click)="addOrderItem()">Agregar</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="mt-4 d-flex justify-content-end">
+        <button class="btn btn-secondary me-2" (click)="order_modal_visible=false;">Salir</button>
+        <button class="btn btn-primary">Agregar</button>
+    </div>
+</p-dialog>
+
+<p-dialog [header]="isEditing?'Editar Producto':'Agregar Producto'" [modal]="true" [(visible)]="product_modal_visible" [style]="{ width: '50rem' }">
+    <div class="row">
+        <div class="col">
+            <label for="add_prod_prod_id" class="form-label">ID del producto: </label>
+            <input [(ngModel)]="product_add_data.product_id" id="add_prod_prod_id" type="number" placeholder="ID del producto" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_prod_prod_name" class="form-label">Nombre: </label>
+            <input [(ngModel)]="product_add_data.product_name" id="add_prod_prod_name" type="text" placeholder="Nombre" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_prod_prod_desc" class="form-label">Descripción: </label>
+            <textarea [(ngModel)]="product_add_data.product_description" id="add_prod_prod_desc" type="text" placeholder="Descripción" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_prod_categ_id" class="form-label">ID de categoría: </label>
+            <input [(ngModel)]="product_add_data.category_id" id="add_prod_categ_id" type="number" placeholder="ID de categoría" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_prod_weight_class" class="form-label">Clase de peso: </label>
+            <input [(ngModel)]="product_add_data.weight_class" id="add_prod_weight_class" type="text" placeholder="Clase de peso" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_prod_warranty_period" class="form-label">Periodo de garantía: </label>
+            <input [(ngModel)]="product_add_data.warranty_period" id="add_prod_warranty_period" type="text" placeholder="Periodo de garantía:" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_prod_supp_id" class="form-label">ID del proveedor: </label>
+            <input [(ngModel)]="product_add_data.supplier_id" id="add_prod_supp_id" type="number" placeholder="ID del proveedor" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_prod_status" class="form-label">Estado del producto: </label>
+            <input [(ngModel)]="product_add_data.product_status" id="add_prod_status" type="text" placeholder="Estado del producto" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_prod_list_price" class="form-label">Precio de lista: </label>
+            <input [(ngModel)]="product_add_data.list_price" id="add_prod_list_price" type="number" placeholder="Precio de lista" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add_prod_min_price" class="form-label">Precio mínimo: </label>
+            <input [(ngModel)]="product_add_data.min_price" id="add_prod_min_price" type="number" placeholder="Precio mínimo" class="form-control">
+        </div>
+        <div class="col">
+            <label for="add_prod_catalog_url" class="form-label">URL del catálogo: </label>
+            <input [(ngModel)]="product_add_data.catalog_url" id="add_prod_catalog_url" type="text" placeholder="URL del catálogo" class="form-control">
+        </div>
+    </div>
+    <div class="mt-4 d-flex justify-content-end">
+        <button class="btn btn-secondary me-2" (click)="product_modal_visible=false;">Salir</button>
+        <button class="btn btn-primary">Agregar</button>
+    </div>
+</p-dialog>

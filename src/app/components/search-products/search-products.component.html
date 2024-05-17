@@ -7,8 +7,8 @@
     </div>
  </div>
  <div class="mt-4">
-     <app-product-data-view *ngFor="let i of products" [productData]="i"></app-product-data-view>
+     <app-product-data-view *ngFor="let i of products" [productData]="i" (edit)="edit.emit($event);"></app-product-data-view>
  </div>
  <div class="d-flex justify-content-end">
-    <button class="btn btn-primary">Agregar producto</button>
-</div>
+    <button class="btn btn-primary" (click)="modal_view.emit(true);">Agregar producto</button>
+</div>  

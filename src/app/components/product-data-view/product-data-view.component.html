@@ -23,5 +23,9 @@
                 <p style="color: white;">Estado: {{productData.product_status}}</p>
             </div>
         </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-success me-2" (click)="edit.emit(productData);">Editar</button>
+            <button class="btn btn-danger">Eliminar</button>
+        </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductData } from 'src/app/dto/product-data.dto';
 
 @Component({
@@ -7,6 +7,10 @@ import { ProductData } from 'src/app/dto/product-data.dto';
   styleUrls: ['./search-products.component.css']
 })
 export class SearchProductsComponent {
+
+  @Output() modal_view = new EventEmitter<boolean>();
+
+  @Output() edit = new EventEmitter<ProductData>();
 
   @Input() products: ProductData[] = [
     {
@@ -36,5 +40,7 @@ export class SearchProductsComponent {
       catalog_url: 'http://example.com/catalog2'
     }
   ];
+
+  visible = false;
 
 }

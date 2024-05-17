@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderData } from 'src/app/dto/order-data.dto';
 
 @Component({
@@ -9,6 +9,8 @@ import { OrderData } from 'src/app/dto/order-data.dto';
 export class OrderDataViewComponent {
 
   @Input() order_data : OrderData = new OrderData();
+
+  @Output() edit = new EventEmitter<OrderData>();
 
   isOpen = false;
 

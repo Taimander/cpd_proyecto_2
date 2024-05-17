@@ -31,6 +31,9 @@
                 {{item.line_item_id}} - {{item.product_name}}: {{item.quantity}} a {{item.unit_price | currency}}
             </div>
         </div>
-        
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-success me-2" (click)="edit.emit(order_data);">Editar</button>
+            <button class="btn btn-danger">Eliminar</button>
+        </div>
     </div>
 </div>

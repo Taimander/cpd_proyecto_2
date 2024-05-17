@@ -11,6 +11,9 @@ import { OrderDataViewComponent } from './components/order-data-view/order-data-
 import { ProductDataViewComponent } from './components/product-data-view/product-data-view.component';
 import { SearchOrdersComponent } from './components/search-orders/search-orders.component';
 import { SearchProductsComponent } from './components/search-products/search-products.component';
+import { DialogModule } from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { SearchProductsComponent } from './components/search-products/search-pro
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
+    FormsModule,
+    DialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

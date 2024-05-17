@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CustomerData } from 'src/app/dto/customer-data.dto';
 
 @Component({
@@ -7,6 +7,9 @@ import { CustomerData } from 'src/app/dto/customer-data.dto';
   styleUrls: ['./search-customers.component.css']
 })
 export class SearchCustomersComponent {
+
+  @Output() modal_view = new EventEmitter<boolean>();
+  @Output() edit = new EventEmitter<CustomerData>();
 
   customers: CustomerData[] = [
     {
@@ -46,5 +49,9 @@ export class SearchCustomersComponent {
       region: 'A'
     }
   ];
+
+  editFn(data: CustomerData) {
+    this.edit.emit(data);
+  }
 
 }

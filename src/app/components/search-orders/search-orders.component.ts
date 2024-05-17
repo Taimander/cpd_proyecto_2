@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { OrderData } from 'src/app/dto/order-data.dto';
 
 @Component({
@@ -7,6 +7,10 @@ import { OrderData } from 'src/app/dto/order-data.dto';
   styleUrls: ['./search-orders.component.css']
 })
 export class SearchOrdersComponent {
+
+  @Output() modal_view = new EventEmitter<boolean>();
+
+  @Output() edit = new EventEmitter<OrderData>();
 
   orders: OrderData[] = [
     {
