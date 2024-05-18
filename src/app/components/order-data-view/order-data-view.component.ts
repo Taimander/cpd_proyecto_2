@@ -11,6 +11,7 @@ export class OrderDataViewComponent {
   @Input() order_data : OrderData = new OrderData();
 
   @Output() edit = new EventEmitter<OrderData>();
+  @Output() delete = new EventEmitter<number>();
 
   isOpen = false;
 

@@ -11,6 +11,7 @@ export class CustomerDataViewComponent {
   @Input() customer_data: CustomerData = new CustomerData();
 
   @Output() edit = new EventEmitter<CustomerData>();
+  @Output() delete = new EventEmitter<number>();
 
   isOpen = false;
 

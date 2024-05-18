@@ -11,6 +11,7 @@ export class ProductDataViewComponent {
   @Input() productData: ProductData = new ProductData();
 
   @Output() edit = new EventEmitter<ProductData>();
+  @Output() delete = new EventEmitter<number>();
 
   isOpen = false;
 
