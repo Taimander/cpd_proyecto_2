@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     await this.update();
+    this.client_modal_visible = false;
+    this.order_modal_visible = false;
+    this.product_modal_visible = false;
   }
 
   async update() {
@@ -46,16 +49,19 @@ export class HomeComponent implements OnInit {
 
   openClientsModal(evt: any) {
     this.client_add_data = new CustomerData();
+    this.isEditing = false;
     this.client_modal_visible = true;
   }
 
   openOrdersModal(evt: any) {
     this.order_add_data = new OrderData();
+    this.isEditing = false;
     this.order_modal_visible = true;
   }
 
   openProductsModal(evt: any) {
     this.product_add_data = new ProductData();
+    this.isEditing = false;
     this.product_modal_visible = true;
   }
 

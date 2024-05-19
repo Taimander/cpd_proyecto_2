@@ -50,7 +50,7 @@
             <input [(ngModel)]="client_add_data.income_level" id="add_prod_income_level" type="text" placeholder="Nivel de ingresos" class="form-control">
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!isEditing">
         <div class="col">
             <label for="add_client_region" class="form-label">Región: </label>
             <input [(ngModel)]="client_add_data.region" id="add_client_region" type="text" placeholder="Región" class="form-control">
@@ -87,7 +87,7 @@
     <div class="row">
         <div class="col">
             <label for="add_order_status" class="form-label">Estado: </label>
-            <input [(ngModel)]="order_add_data.order_status" id="add_order_status" type="text" placeholder="Estado" class="form-control">
+            <input [(ngModel)]="order_add_data.order_status" id="add_order_status" type="number" placeholder="Estado" class="form-control">
         </div>
         <div class="col">
             <label for="add_order_sales_rep_id" class="form-label">ID del vendedor: </label>
@@ -111,11 +111,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let i of order_add_data.items">
-                    <td><input [(ngModel)]="i.order_id" type="number" class="form-control"></td>
+                    <td><input [(ngModel)]="i.product_id" type="number" class="form-control"></td>
                     <td><input [(ngModel)]="i.quantity" type="number" class="form-control"></td>
                     <td><input [(ngModel)]="i.unit_price" type="number" class="form-control"></td>
                 </tr>
-                <tr>
+                <tr *ngIf="!isEditing">
                     <td></td>
                     <td></td>
                     <td class="d-flex justify-content-end"><button class="btn btn-success" (click)="addOrderItem()">Agregar</button></td>
